@@ -1,0 +1,92 @@
+{
+  "name": "inlineCompetion",
+  "displayName": "inline-competion",
+  "description": "inline autoComplete",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.97.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand: daik.helloWorld",
+    "onLanguage"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "daik.helloWorld",
+        "title": "Hello World"
+      },
+      {
+        "command": "extension.demo.getCurrentFilePath",
+        "title": "获取当前路径"
+      },
+      {
+        "command": "extension.inline-completion-settings",
+        "title": "补全设置"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "daik.helloWorld",
+        "key": "ctrl+f10",
+        "mac": "cmd+f10",
+        "when": "editorTextFocus"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "when": "editorFocus",
+          "command": "daik.helloWorld",
+          "group": "navigation"
+        },
+        {
+          "when": "editorFocus",
+          "command": "extension.demo.getCurrentFilePath",
+          "group": "navigation"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "extension.demo.getCurrentFilePath",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "pnpm run package",
+    "compile": "pnpm run check-types && pnpm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "pnpm run check-types && pnpm run lint && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "pnpm run compile-tests && pnpm run compile && pnpm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.97.0",
+    "@typescript-eslint/eslint-plugin": "^8.22.0",
+    "@typescript-eslint/parser": "^8.22.0",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1",
+    "esbuild": "^0.24.2",
+    "eslint": "^9.19.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "axios": "^1.7.9",
+    "node-fetch": "^3.3.2"
+  }
+}
