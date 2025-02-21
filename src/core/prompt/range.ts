@@ -1,14 +1,6 @@
-// import { Position, Range } from "../index.js";
+import { Position, Range } from "../../";
 
-export interface Position {
-  line: number;
-  character: number;
-}
 
-export interface Range {
-  start: Position;
-  end: Position;
-}
 /**
  * 从给定的字符串中提取指定范围的文本。
  * @param {string} content - 要提取文本的原始字符串。

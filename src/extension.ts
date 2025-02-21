@@ -3,7 +3,7 @@ import { streamSse } from "./util/streams";
 import fetch from "node-fetch";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
-import { getRangeInString } from "./util/range";
+import { getRangeInString } from "./core/prompt/range";
 import OpenAI from 'openai';
 import Handlebars = require("handlebars");
 

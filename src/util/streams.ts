@@ -75,6 +75,7 @@ function parseSseLine(line: string): { done: boolean; data: any } {
   return { done: false, data: undefined };
 }
 
+// fetch请求流处理方式
 export async function* streamSse(response: Response): AsyncGenerator<any> {
   let buffer = "";
   for await (const value of streamResponse(response)) {
