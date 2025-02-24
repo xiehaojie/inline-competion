@@ -2,6 +2,7 @@ import * as vscode from "vscode";
 import { llmOpenAI } from "../core";
 import { AutocompleteDebouncer } from "../core/util/debouncer";
 import { DAIKCompletionProvider } from "../core/provider/autoCompetion/DAIKCompletionProvider";
+import { SidebarProvider } from "../core/provider/sideBarView/sibeBarViewProvider";
 
 export class VsCodeExtension {
   // openai客户端初始化
@@ -37,12 +38,22 @@ export class VsCodeExtension {
     this.llmOpenAI = new llmOpenAI(this.setting);
     // 防抖函数配置
     this.debouncer = new AutocompleteDebouncer();
-    // 注册补全
+    // 注册行内补全
     context.subscriptions.push(
       vscode.languages.registerInlineCompletionItemProvider(
         [{ pattern: "**" }],
         new DAIKCompletionProvider(this.llmOpenAI, this.debouncer)
       )
     );
+    const sideBarWebview = new SidebarProvider(context.extensionUri);
+    //注册容器页面view
+    try {
+      context.subscriptions.push(
+        vscode.window.registerWebviewViewProvider(SidebarProvider.viewId,sideBarWebview)
+      );
+    } catch (error) {
+      console.log('errrr',error);
+    }
+
   }
 }

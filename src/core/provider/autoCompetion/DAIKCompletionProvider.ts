@@ -9,12 +9,9 @@ import { llmOpenAI } from "../..";
 export class DAIKCompletionProvider
   implements vscode.InlineCompletionItemProvider
 {
-  private llmOpenAI:llmOpenAI;
-  private debouncer:AutocompleteDebouncer;
-  constructor(
-    llmOpenAI: llmOpenAI,
-    debouncer :AutocompleteDebouncer
-  ) {
+  private llmOpenAI: llmOpenAI;
+  private debouncer: AutocompleteDebouncer;
+  constructor(llmOpenAI: llmOpenAI, debouncer: AutocompleteDebouncer) {
     this.debouncer = debouncer;
     this.llmOpenAI = llmOpenAI;
   }

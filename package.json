@@ -15,6 +15,26 @@
   ],
   "main": "./dist/extension.js",
   "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "daik-view",
+          "title": "daik",
+          "icon": "src/assets/img/activitybar/xu.png"
+        }
+      ]
+    },
+    "views": {
+      "daik-view": [
+        {
+          "type": "webview",
+          "id": "daik-view-sidebar",
+          "name": "容器名称",
+          "icon": "src/assets/img/activitybar/xu.png",
+          "contextualTitle": "容器view视图"
+        }
+      ]
+    },
     "commands": [
       {
         "command": "daik.helloWorld",
@@ -61,7 +81,6 @@
   "scripts": {
     "vscode:prepublish": "pnpm run package",
     "compile": "pnpm run check-types && pnpm run lint && node esbuild.js",
-    "watch": "npm-run-all -p watch:*",
     "watch:esbuild": "node esbuild.js --watch",
     "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
     "package": "pnpm run check-types && pnpm run lint && node esbuild.js --production",
