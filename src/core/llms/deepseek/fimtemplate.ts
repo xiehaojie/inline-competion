@@ -1,4 +1,4 @@
-import { modelFimTemplate } from "../../..";
+import { modelFimTemplate } from "../../core";
 // https://huggingface.co/deepseek-ai/deepseek-coder-1.3b-base
 export const deepseekFimTemplate: modelFimTemplate= {
     template:

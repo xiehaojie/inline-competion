@@ -1,12 +1,13 @@
-import { template } from "handlebars";
-import { getRangeInString } from "../../core/prompt/range";
+import { compile }from "handlebars";
+import { getRangeInString } from "../..//prompt/range";
 import * as vscode from "vscode";
-import { modelFimTemplate } from "../..";
+import { modelFimTemplate } from "../../core";
+
 
 
 // 利用Handelbars填充
 const getPrompt = (prefix: string, suffix: string, modelTemplate:string) => {
-  let template = Handlebars.compile(modelTemplate);
+  let template = compile(modelTemplate);
   return template({ prefix, suffix });
 };
 export const handleDocumentText = (

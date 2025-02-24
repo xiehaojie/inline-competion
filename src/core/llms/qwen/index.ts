@@ -1,34 +1,31 @@
 import OpenAI from "openai";
+import { LLM } from "../llms";
 
-
-
-export class Qwen{
-    private options:any;
-    private client:OpenAI
-    constructor(options:any,client:OpenAI){
-        this.options = options;
-        this.client = client;
+export class Qwen implements LLM{
+  option: any;
+  client: OpenAI;
+  constructor(option: any, client: OpenAI) {
+    this.option = option;
+    this.client = client;
+  }
+  chat(): Promise<string> {
+    throw new Error("Method not implemented.");
+  }
+  fimWithStream(): Promise<string> {
+    throw new Error("Method not implemented.");
+  }
+  // openAI请求
+  async fimWithOpenAI(prefix: string, suffix: string) {
+    const completion = await this.client.completions.create({
+      model: this.option.openAI.model,
+      prompt: prefix,
+      suffix,
+      stream: true,
+    });
+    let str = "";
+    for await (const chunk of completion) {
+      str += chunk.choices[0].text;
     }
-    // chat
-    async chat (){
-
-    }
-    // openAI请求
-    async fimWithOpenAI (prefix:string, suffix:string){
-        const completion = await this.client.completions.create({
-            model: "Qwen/Qwen2.5-Coder-7B-Instruct",
-            prompt: prefix,
-            suffix,
-            stream:true,
-          });
-          let str = "";
-          for await (const chunk of completion) {
-            str+=chunk.choices[0].text;
-          }
-          return str;
-    }
-        // 流式请求
-        async fimWithStream (){
-        
-        }
+    return str;
+  }
 }

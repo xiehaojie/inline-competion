@@ -4,7 +4,7 @@ import {
   handleDocumentTextWithPreSuf,
 } from "./renderPrompt";
 import { AutocompleteDebouncer } from "../../util/debouncer";
-import { llmOpenAI } from "../../core";
+import { llmOpenAI } from "../..";
 
 export class DAIKCompletionProvider
   implements vscode.InlineCompletionItemProvider
@@ -47,13 +47,11 @@ export class DAIKCompletionProvider
         document.getText(),
         position
       );
-
-      //获取请求
-      // const respData = await fetchDataWithQwen(lineText, signal);
-
-      // const respData = await fetchDataWithQwen(prefix,suffix);
-      const respData = await this.llmOpenAI.fim.getContent(prefix, suffix);
-
+      const model = this.llmOpenAI.fim.model;
+      if (!model) {
+        throw new Error("model is undefined");
+      }
+      const respData = await model.fimWithOpenAI(prefix, suffix);
       const range = new vscode.Range(position, position);
       items.push(new vscode.InlineCompletionItem(respData, range));
       return items;

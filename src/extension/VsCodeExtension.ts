@@ -1,7 +1,7 @@
 import * as vscode from "vscode";
 import { llmOpenAI } from "../core";
-import { AutocompleteDebouncer } from "../util/debouncer";
-import { DAIKCompletionProvider } from "../provider/autoCompetion/DAIKCompletionProvider";
+import { AutocompleteDebouncer } from "../core/util/debouncer";
+import { DAIKCompletionProvider } from "../core/provider/autoCompetion/DAIKCompletionProvider";
 
 export class VsCodeExtension {
   // openai客户端初始化
@@ -12,6 +12,8 @@ export class VsCodeExtension {
   private debouncer: AutocompleteDebouncer;
 
   constructor(context: vscode.ExtensionContext) {
+    // 需要获取配置信息
+    // vscode.workspace.getConfiguration("fim");
     // 获取配置列表
     this.setting = {
       fim: {

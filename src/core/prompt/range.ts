@@ -1,6 +1,4 @@
-import { Position, Range } from "../../";
-
-
+import { Position, Range } from '../core';
 /**
  * 从给定的字符串中提取指定范围的文本。
  * @param {string} content - 要提取文本的原始字符串。

@@ -1,4 +1,4 @@
-import { modelFimTemplate } from "../../..";
+import { modelFimTemplate } from "../../core";
 // https://github.com/QwenLM/Qwen2.5-Coder?tab=readme-ov-file#3-file-level-code-completion-fill-in-the-middle
 export const qwenCoderFimTemplate: modelFimTemplate = {
   template:
